@@ -16,7 +16,10 @@ import {
    collection,
    query,
    orderBy,
-   onSnapshot
+   onSnapshot,
+   doc,
+   setDoc,
+   where
   } from 'firebase/firestore';
 
 import * as firebaseui from 'firebaseui';
@@ -111,11 +114,19 @@ async function main() {
     name: auth.currentUser.displayName,
     userId: auth.currentUser.uid
   });
+  
   // clear message input field
   input.value = '';
   // Return false to avoid redirect
   return false;
   });
+
+  // Listen to RSVP responses
+  rsvpYes.onclick = async () => {
+  };
+  rsvpNo.onclick = async () => {
+  };
+
 }
 
 main();
