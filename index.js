@@ -118,6 +118,8 @@ async function main() {
   });
 }
 
+main();
+
   // Listen to guestbook updates
  function subscribeGuestbook() {
   const q = query(collection(db, 'guestbook'), orderBy('timestamp', 'desc'));
@@ -142,4 +144,4 @@ async function main() {
   }
 }
 
-main();
+
