@@ -89,10 +89,14 @@ async function main() {
       startRsvpButton.textContent = 'LOGOUT';
       // Show guestbook to logged-in users
       guestbookContainer.style.display = 'block';
+      // Subscribe to the guestbook collection
+      subscribeGuestbook();
     } else {
       startRsvpButton.textContent = 'LOGIN';
       // Hide guestbook for non-logged-in users
       guestbookContainer.style.display = 'none';
+      // Unsubscribe from the guestbook collection
+      unsubscribeGuestbook();
     }
   });
 
@@ -112,10 +116,12 @@ async function main() {
   // Return false to avoid redirect
   return false;
   });
+}
 
-  // Create query for messages
+  // Listen to guestbook updates
+ function subscribeGuestbook() {
   const q = query(collection(db, 'guestbook'), orderBy('timestamp', 'desc'));
-  onSnapshot(q, snaps => {
+  guestbookListener = onSnapshot(q, snaps => {
     // Reset page
     guestbook.innerHTML = '';
     // Loop through documents in database
@@ -126,7 +132,14 @@ async function main() {
       guestbook.appendChild(entry);
     });
   });
+ }
 
+ // Unsubscribe from guestbook updates
+ function unsubscribeGuestbook() {
+  if (guestbookListener != null) {
+    guestbookListener();
+    guestbookListener = null;
+  }
 }
 
 main();
