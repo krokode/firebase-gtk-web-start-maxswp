@@ -95,7 +95,7 @@ async function main() {
       // Subscribe to the guestbook collection
       subscribeGuestbook();
     } else {
-      startRsvpButton.textContent = 'LOGIN';
+      startRsvpButton.textContent = 'RSPV';
       // Hide guestbook for non-logged-in users
       guestbookContainer.style.display = 'none';
       // Unsubscribe from the guestbook collection
